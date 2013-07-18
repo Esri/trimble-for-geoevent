@@ -1,0 +1,77 @@
+<adapter name="Trimble" label="Trimble Inbound Adapter" domain="com.esri.ges.adapter.inbound" type="inbound">
+	<description>This adapter is capable of receiving raw data in the TAIP format from AVL units.</description>
+	<geoEventDefinitions>
+		<geoEventDefinition name="TAIP0xF0">
+			<fieldDefinitions>
+				<fieldDefinition name="DeviceId" type="String">
+					<fieldDefinitionTag>
+						<name>TRACK_ID</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="TimeStamp" type="Date">
+					<fieldDefinitionTag>
+						<name>TIME_START</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="Shape" type="Geometry">
+					<fieldDefinitionTag>
+						<name>GEOMETRY</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="Speed" type="Short"/>
+				<fieldDefinition name="Heading" type="Short"/>
+				<fieldDefinition name="Source" type="Short"/>
+				<fieldDefinition name="Age" type="Short"/>
+			</fieldDefinitions>
+		</geoEventDefinition>
+		<geoEventDefinition name="TAIP0xF1">
+			<fieldDefinitions>
+				<fieldDefinition name="DeviceId" type="String">
+					<fieldDefinitionTag>
+						<name>TRACK_ID</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="TimeStamp" type="Date">
+					<fieldDefinitionTag>
+						<name>TIME_START</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="Shape" type="Geometry">
+					<fieldDefinitionTag>
+						<name>GEOMETRY</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="Source" type="Short"/>
+				<fieldDefinition name="Age" type="Short"/>
+			</fieldDefinitions>
+		</geoEventDefinition>
+		<geoEventDefinition name="TAIP0xF2">
+			<fieldDefinitions>
+				<fieldDefinition name="DeviceId" type="String">
+					<fieldDefinitionTag>
+						<name>TRACK_ID</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="TimeStamp" type="Date">
+					<fieldDefinitionTag>
+						<name>TIME_START</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="Shape" type="Geometry">
+					<fieldDefinitionTag>
+						<name>GEOMETRY</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="Altitude" type="Double"/>
+				<fieldDefinition name="HorizSpeed" type="Double"/>
+				<fieldDefinition name="VertSpeed" type="Double"/>
+				<fieldDefinition name="Heading" type="Double"/>
+				<fieldDefinition name="NumSVs" type="Short"/>
+				<fieldDefinition name="SV" type="String"/>
+				<fieldDefinition name="Reserved" type="String"/>
+				<fieldDefinition name="Source" type="Short"/>
+				<fieldDefinition name="Age" type="Short"/>
+			</fieldDefinitions>
+		</geoEventDefinition>
+	</geoEventDefinitions>
+</adapter>
