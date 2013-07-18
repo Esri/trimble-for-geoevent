@@ -56,7 +56,7 @@ public class TaipAdapterTest
           }
 
           @Override
-          public GeoEvent clone( GeoEvent parent )
+          public GeoEvent clone(GeoEvent parent)
           {
             return this;
           }
@@ -120,6 +120,7 @@ public class TaipAdapterTest
           {
             return null;
           }
+
           @Override
           public void setGeometry(Geometry geometry)
           {
@@ -131,6 +132,7 @@ public class TaipAdapterTest
           {
             return null;
           }
+
           @Override
           public void setGeometry(String name, Geometry geometry)
           {
@@ -260,7 +262,7 @@ public class TaipAdapterTest
     testBinaryFile("/TAIP0xF2.dat", 5);
   }
 
-  private void testBinaryFile( String fileName, int messages ) throws IOException
+  private void testBinaryFile(String fileName, int messages) throws IOException
   {
     String channel = "";
     int currentMsg = 0;
@@ -269,17 +271,17 @@ public class TaipAdapterTest
     buf.clear();
     int batchSize = 5;
 
-    while( currentMsg < messages)
+    while (currentMsg < messages)
     {
       byte[] batch = new byte[batchSize];
       int bytesRead = in.read(batch);
-      if( bytesRead < 0 )
+      if (bytesRead < 0)
         Assert.fail("Ran out of data in the input file " + fileName);
-      buf.put(batch,0,bytesRead);
+      buf.put(batch, 0, bytesRead);
       buf.flip();
       GeoEvent message = adapter.adapt(buf, channel);
       buf.compact();
-      if(message != null)
+      if (message != null)
       {
         currentMsg++;
       }
