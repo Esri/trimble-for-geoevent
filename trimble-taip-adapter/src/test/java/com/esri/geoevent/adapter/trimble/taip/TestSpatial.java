@@ -69,7 +69,102 @@ public class TestSpatial implements Spatial
   @Override
   public Point createPoint(double x, double y, int wkid)
   {
-    return null;
+    return new Point()
+    {
+      private static final long serialVersionUID = 1L;
+      
+      @Override
+      public void setSpatialReference(SpatialReference arg0)
+      {
+        ;
+      }
+      
+      @Override
+      public GeometryType getType()
+      {
+        return GeometryType.Point;
+      }
+      
+      @Override
+      public SpatialReference getSpatialReference()
+      {
+        return new SpatialReference()
+        {
+          private static final long serialVersionUID = 1L;
+
+          @Override
+          public void setWkid(int wkid)
+          {
+            ;
+          }
+          
+          @Override
+          public int getWkid()
+          {
+            return 4326;
+          }
+          
+          @Override
+          public boolean equals(SpatialReference sr)
+          {
+            return true;
+          }
+        };
+      }
+      
+      @Override
+      public void setZ(double z)
+      {
+        ;
+      }
+      
+      @Override
+      public void setY(double y)
+      {
+        ;
+      }
+      
+      @Override
+      public void setX(double x)
+      {
+        ;
+      }
+      
+      @Override
+      public double getZ()
+      {
+        return 0;
+      }
+      
+      @Override
+      public double getY()
+      {
+        return 0;
+      }
+      
+      @Override
+      public double getX()
+      {
+        return 0;
+      }
+      
+      @Override
+      public boolean equals(Point point)
+      {
+        return false;
+      }
+      
+      @Override
+      public String toJson()
+      {
+        StringBuffer sb = new StringBuffer();
+        sb.append("{\"x\":").append(0);
+        sb.append(", \"y\":").append(0);
+        sb.append(", \"z\":").append(0);
+        sb.append(", \"spatialReference\":{\"wkid\":").append(getSpatialReference().getWkid()).append("}}");
+        return sb.toString();
+      }
+    };
   }
 
   @Override
