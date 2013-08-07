@@ -37,7 +37,7 @@ Find a bug or want to request a new feature?  Please let us know by submitting a
 
 ## Contributing
 
-Anyone and everyone is welcome to contribute. 
+Esri welcomes contributions from anyone and everyone. Please see our [guidelines for contributing](https://github.com/esri/contributing).
 
 ## Licensing
 Copyright 2013 Esri
@@ -56,6 +56,6 @@ limitations under the License.
 
 A copy of the license is available in the repository's [license.txt](license.txt?raw=true) file.
 
-[](ArcGIS, GeoEvent, Processor)
+[](ArcGIS, GeoEvent, Processor, Connector, Trimble, TAIP)
 [](Esri Tags: ArcGIS GeoEvent Processor for Server)
 [](Esri Language: Java)
