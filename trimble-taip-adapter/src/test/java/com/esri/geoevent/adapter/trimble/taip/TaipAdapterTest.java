@@ -20,7 +20,7 @@
   Redlands, California, USA 92373
 
   email: contracts@esri.com
-*/
+ */
 
 package com.esri.geoevent.adapter.trimble.taip;
 
@@ -267,10 +267,10 @@ public class TaipAdapterTest
         return null;
       }
     };
-    // TODO - Spatial spatial = new TestSpatial();
+    Spatial spatial = new TestSpatial();
     adapter = new TaipInboundAdapter(new XmlAdapterDefinition(this.getClass().getClassLoader().getResourceAsStream("adapter-definition.xml")));
     adapter.setGeoEventCreator(factory);
-    // TODO - adapter.setSpatial(spatial);
+    adapter.setSpatial(spatial);
   }
 
   @After
@@ -303,7 +303,7 @@ public class TaipAdapterTest
         Assert.fail("Ran out of data in the input file " + fileName);
       buf.put(batch, 0, bytesRead);
       buf.flip();
-      
+
       GeoEvent message = adapter.adapt(buf, channel);
       buf.compact();
       if (message != null)
