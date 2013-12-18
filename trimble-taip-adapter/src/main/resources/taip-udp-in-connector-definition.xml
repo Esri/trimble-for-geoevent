@@ -1,0 +1,16 @@
+<connectorDefinition label="Receive TAIP from a UDP Socket" name="esri-in-udp-taip" type="inbound">
+	<description>Receive TAIP sentences on a UDP Socket. The TAIP sentences supported include TAIP0xF0(RPV), TAIP0xF1(RCP), and TAIP0xF2(RLN).</description>
+	<defaultName>udp-taip-in</defaultName>
+	<adapter uri="com.esri.geoevent.adapter.inbound/TAIP/10.2.0" />
+	<transport uri="com.esri.ges.transport.inbound/UDP/10.2.0" />
+	<properties>
+		<shown>
+			<property name="port" label="Server Port" default="5565" source="transport" />
+		</shown>
+		<advanced>
+			<property name="multicast" label="Multicast mode" default="false" source="transport"/>
+			<property name="multicastGroup" label="Multicast group" default="233.252.0.99" source="transport"/>
+		</advanced>
+		<hidden/>
+	</properties>
+</connectorDefinition>

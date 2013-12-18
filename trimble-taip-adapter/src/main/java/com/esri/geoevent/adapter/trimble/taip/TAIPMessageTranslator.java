@@ -20,7 +20,7 @@
   Redlands, California, USA 92373
 
   email: contracts@esri.com
-*/
+ */
 
 package com.esri.geoevent.adapter.trimble.taip;
 
@@ -40,29 +40,110 @@ public abstract class TAIPMessageTranslator
 
   protected abstract void translate(String trackId, ByteBuffer buffer, GeoEvent geoEvent, Spatial spatial) throws MessagingException, FieldException;
 
-  protected String readString(ByteBuffer from, int bytes)
+  protected String readString(ByteBuffer from, int bytes) throws MessagingException
   {
-    byte[] buf = new byte[bytes];
-    from.get(buf);
-    return new String(buf);
+    if (from.remaining() >= bytes)
+    {
+      byte[] buf = new byte[bytes];
+      from.get(buf);
+      return new String(buf);
+    }
+    throw new MessagingException("TAIP message field size is expected to be " + bytes + " bytes long but only " + from.remaining() + " bytes are actually available.");
   }
 
-  protected Date secondsToTime(int seconds)
+  protected Date secondsToTime(Integer seconds)
   {
-    int zh;
-    int zm;
-    int zs;
+    if (seconds != null)
+    {
+      int zh;
+      int zm;
+      int zs;
 
-    Calendar c = Calendar.getInstance();
+      Calendar c = Calendar.getInstance();
 
-    zh = seconds / 3600;
-    zm = seconds / 60 - zh * 60;
-    zs = seconds - (zh * 3600 + zm * 60);
+      zh = seconds / 3600;
+      zm = seconds / 60 - zh * 60;
+      zs = seconds - (zh * 3600 + zm * 60);
 
-    c.set(Calendar.HOUR, zh);
-    c.set(Calendar.MINUTE, zm);
-    c.set(Calendar.SECOND, zs);
+      c.set(Calendar.HOUR, zh);
+      c.set(Calendar.MINUTE, zm);
+      c.set(Calendar.SECOND, zs);
+      return c.getTime();
+    }
+    return null;
+  }
 
-    return c.getTime();
+  public boolean isEmpty(String s)
+  {
+    return (s == null || s.length() == 0);
+  }
+
+  public Double convertToDouble(String s, Double defaultValue)
+  {
+    if (!isEmpty(s))
+    {
+      try
+      {
+        return Double.parseDouble(s.replaceAll(",", "."));
+      }
+      catch (Exception e)
+      {
+        ;
+      }
+    }
+    return defaultValue;
+  }
+
+  public Double convertToDouble(Object value)
+  {
+    return (value != null) ? (value instanceof Double) ? (Double) value : convertToDouble(value.toString(), null) : null;
+  }
+
+  public Integer convertToInteger(Object value)
+  {
+    if (value != null)
+    {
+      if (value instanceof Integer)
+        return (Integer) value;
+      else
+      {
+        Double doubleValue = convertToDouble(value);
+        if (doubleValue != null)
+          return ((Long) Math.round(doubleValue)).intValue();
+      }
+    }
+    return null;
+  }
+
+  public Short convertToShort(Object value)
+  {
+    if (value != null)
+    {
+      if (value instanceof Short)
+        return (Short) value;
+      else
+      {
+        Double doubleValue = convertToDouble(value);
+        if (doubleValue != null)
+          return ((Long) Math.round(doubleValue)).shortValue();
+      }
+    }
+    return null;
+  }
+
+  public Long convertToLong(Object value)
+  {
+    if (value != null)
+    {
+      if (value instanceof Long)
+        return (Long) value;
+      else
+      {
+        Double doubleValue = convertToDouble(value);
+        if (doubleValue != null)
+          return Math.round(doubleValue);
+      }
+    }
+    return null;
   }
 }

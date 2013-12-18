@@ -1,0 +1,19 @@
+<connectorDefinition label="Receive TAIP from a TCP Socket" name="esri-in-tcp-taip" type="inbound">
+	<description>Receive TAIP sentences on a TCP Socket. The TAIP sentences supported include TAIP0xF0(RPV), TAIP0xF1(RCP), and TAIP0xF2(RLN).</description>
+	<defaultName>tcp-taip-in</defaultName>
+	<adapter uri="com.esri.geoevent.adapter.inbound/TAIP/10.2.0" />
+	<transport uri="com.esri.ges.transport.inbound/TCP/10.2.0" />
+	<properties>
+		<shown>
+			<property name="port" label="Server Port" default="5565" source="transport" />
+		</shown>
+		<advanced>
+		</advanced>
+		<hidden>
+			<property name="mode" label="Mode" default="SERVER" source="transport" />
+			<property name="host" label="Host (Client Mode)" default="" source="transport" />
+			<property name="clientConnectionTimeout" label="Connection Timeout (Client Mode)" default="60" source="transport" />
+			<property name="handshake" label="Handshake Text" default="" source="transport" />
+		</hidden>
+	</properties>
+</connectorDefinition>

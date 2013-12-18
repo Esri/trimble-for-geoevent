@@ -20,13 +20,14 @@
   Redlands, California, USA 92373
 
   email: contracts@esri.com
-*/
+ */
 
 package com.esri.geoevent.adapter.trimble.taip;
 
-import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -35,72 +36,117 @@ import org.apache.commons.logging.LogFactory;
 import com.esri.ges.adapter.AdapterDefinition;
 import com.esri.ges.adapter.InboundAdapterBase;
 import com.esri.ges.core.component.ComponentException;
-import com.esri.ges.core.geoevent.FieldException;
 import com.esri.ges.core.geoevent.GeoEvent;
-import com.esri.ges.messaging.MessagingException;
 
 public class TaipInboundAdapter extends InboundAdapterBase
 {
   private static final Log LOG = LogFactory.getLog(TaipInboundAdapter.class);
   private final Map<String, TAIPMessageTranslator> translators = new HashMap<String, TAIPMessageTranslator>();
+  private final Map<String, String> lookup = new HashMap<String, String>();
 
   public TaipInboundAdapter(AdapterDefinition definition) throws ComponentException
   {
     super(definition);
-    translators.put("TAIP0xF0", new TAIP0xF0MessageTranslator());
-    translators.put("TAIP0xF1", new TAIP0xF1MessageTranslator());
-    translators.put("TAIP0xF2", new TAIP0xF2MessageTranslator());
+    lookup.put("RPV", "TAIP0xF0");
+    lookup.put("RCP", "TAIP0xF1");
+    lookup.put("RLN", "TAIP0xF2");
+    translators.put("RPV", new TAIP0xF0MessageTranslator());
+    translators.put("RCP", new TAIP0xF1MessageTranslator());
+    translators.put("RLN", new TAIP0xF2MessageTranslator());
+  }
+
+  private class GeoEventProducer implements Runnable
+  {
+    private String channelId;
+    private List<byte[]> messages;
+
+    public GeoEventProducer(String channelId, List<byte[]> messages)
+    {
+      this.channelId = channelId;
+      this.messages = messages;
+    }
+
+    @Override
+    public void run()
+    {
+      while (!messages.isEmpty())
+      {
+        ByteBuffer message = ByteBuffer.wrap(messages.remove(0));
+        if (message.remaining() >= 3)
+        {
+          byte[] chars = new byte[3];
+          message.get(chars);
+          String taipFormat = new String(chars);
+          if (lookup.containsKey(taipFormat))
+          {
+            try
+            {
+              GeoEvent geoEvent = geoEventCreator.create(((AdapterDefinition) definition).getGeoEventDefinition(lookup.get(taipFormat)).getGuid());
+              translators.get(taipFormat).translate(channelId, message, geoEvent, spatial);
+              geoEventListener.receive(geoEvent);
+            }
+            catch (Throwable t)
+            {
+              LOG.error("ERROR translating TAIP message: " + t.getMessage());
+            }
+          }
+          else
+            LOG.error("ERROR translating TAIP message: TAIP format '" + taipFormat + "' is not supported");
+        }
+      }
+    }
   }
 
   @Override
-  public GeoEvent adapt(ByteBuffer buffer, String channelID)
+  public GeoEvent adapt(ByteBuffer buffer, String channelId)
   {
-    if (buffer == null)
-      return null;
-
-    // First we will scan through the data looking for a viable start-of-message indicator ">"
-    buffer.mark();
-    while (buffer.remaining() > 0 && buffer.get() != '>')
-      buffer.mark();
-    if (buffer.remaining() >= 3)
-    {
-      byte[] chars = new byte[3];
-      buffer.get(chars);
-      String edName = parseEventDefinitionName(new String(chars));
-      if (translators.containsKey(edName))
-        try
-      {
-          GeoEvent geoEvent = geoEventCreator.create(((AdapterDefinition)definition).getGeoEventDefinition(edName).getGuid());
-          translators.get(edName).translate(channelID, buffer, geoEvent, spatial);
-          buffer.mark();
-          return geoEvent;
-          // TODO Figure out what to do with Numberformat exceptions from bad input data.
-      }
-      catch (BufferUnderflowException ex)
-      {
-        buffer.reset();
-      }
-      catch (MessagingException e)
-      {
-        LOG.error("Exception while translating a TAIP message : " + e.getMessage());
-      } catch (FieldException e)
-      {
-        LOG.error("Exception while translating a TAIP message : " + e.getMessage());
-      }
-    }
-    else
-      buffer.reset();
+    // We don't need to implement anything in here because this method will
+    // never get called. It would normally be called
+    // by the base class's receive() method. However, we are overriding that
+    // method, and our new implementation does not call
+    // the adapter's adapt() method.
     return null;
   }
-
-  private String parseEventDefinitionName(String msgFormat)
+  
+  @Override
+  public void receive(ByteBuffer buffer, String channelId)
   {
-    if ("RPV".equals(msgFormat))
-      return "TAIP0xF0";
-    else if ("RCP".equals(msgFormat))
-      return "TAIP0xF1";
-    else if ("RLN".equals(msgFormat))
-      return "TAIP0xF2";
-    return null;
+    new Thread(new GeoEventProducer(channelId, index(buffer))).start();
+  }
+
+  @Override
+  public void shutdown()
+  {
+    super.shutdown();
+    translators.clear();
+    lookup.clear();
+  }
+
+  private static List<byte[]> index(ByteBuffer in)
+  {
+    List<byte[]> messages = new ArrayList<byte[]>();
+    for (int i = -1; in.hasRemaining();)
+    {
+      byte b = in.get();
+      if (b == ((byte) '>')) // bom
+      {
+        i = in.position();
+        in.mark();
+      }
+      else if (b == ((byte) '<')) // eom
+      {
+        if (i != -1)
+        {
+          byte[] message = new byte[in.position() - 1 - i];
+          System.arraycopy(in.array(), i, message, 0, message.length);
+          messages.add(message);
+        }
+        i = -1;
+        in.mark();
+      }
+      else if (messages.isEmpty() && i == -1)
+        in.mark();
+    }
+    return messages;
   }
 }
