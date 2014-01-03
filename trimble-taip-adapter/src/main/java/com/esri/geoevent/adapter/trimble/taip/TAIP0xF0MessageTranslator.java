@@ -38,7 +38,7 @@ public class TAIP0xF0MessageTranslator extends TAIPMessageTranslator
   {
     int i = 0;
     geoEvent.setField(i++, trackId);
-    geoEvent.setField(i++, secondsToTime(convertToInteger(readString(buf, 5))));
+    geoEvent.setField(i++, toTime(convertToInteger(readString(buf, 5)), 0));
     Integer y = convertToInteger(readString(buf, 8).replace('+', ' ').trim());
     Integer x = convertToInteger(readString(buf, 9).replace('+', ' ').trim());
     if (x != null && y != null)

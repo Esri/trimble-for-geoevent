@@ -27,6 +27,7 @@ package com.esri.geoevent.adapter.trimble.taip;
 import java.nio.ByteBuffer;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import com.esri.ges.core.geoevent.FieldException;
 import com.esri.ges.core.geoevent.GeoEvent;
@@ -51,23 +52,18 @@ public abstract class TAIPMessageTranslator
     throw new MessagingException("TAIP message field size is expected to be " + bytes + " bytes long but only " + from.remaining() + " bytes are actually available.");
   }
 
-  protected Date secondsToTime(Integer seconds)
+  protected Date toTime(Integer s, Integer ms)
   {
-    if (seconds != null)
+    if (s != null)
     {
-      int zh;
-      int zm;
-      int zs;
-
-      Calendar c = Calendar.getInstance();
-
-      zh = seconds / 3600;
-      zm = seconds / 60 - zh * 60;
-      zs = seconds - (zh * 3600 + zm * 60);
-
-      c.set(Calendar.HOUR, zh);
+      Calendar c = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+      int zh = s / 3600;
+      int zm = s / 60 - zh * 60;
+      int zs = s - (zh * 3600 + zm * 60);
+      c.set(Calendar.HOUR_OF_DAY, zh);
       c.set(Calendar.MINUTE, zm);
       c.set(Calendar.SECOND, zs);
+      c.set(Calendar.MILLISECOND, ms);
       return c.getTime();
     }
     return null;
