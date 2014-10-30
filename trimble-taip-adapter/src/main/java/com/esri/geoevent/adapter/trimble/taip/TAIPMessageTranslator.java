@@ -31,15 +31,18 @@ import java.util.TimeZone;
 
 import com.esri.ges.core.geoevent.FieldException;
 import com.esri.ges.core.geoevent.GeoEvent;
+import com.esri.ges.framework.i18n.BundleLogger;
+import com.esri.ges.framework.i18n.BundleLoggerFactory;
 import com.esri.ges.messaging.GeoEventCreator;
 import com.esri.ges.messaging.MessagingException;
-import com.esri.ges.spatial.Spatial;
 
 public abstract class TAIPMessageTranslator
 {
+  private static final BundleLogger LOGGER = BundleLoggerFactory.getLogger(TAIPMessageTranslator.class);
+
   protected GeoEventCreator geoEventCreator;
 
-  protected abstract void translate(String trackId, ByteBuffer buffer, GeoEvent geoEvent, Spatial spatial) throws MessagingException, FieldException;
+  protected abstract void translate(String trackId, ByteBuffer buffer, GeoEvent geoEvent) throws MessagingException, FieldException;
 
   protected String readString(ByteBuffer from, int bytes) throws MessagingException
   {
@@ -49,7 +52,7 @@ public abstract class TAIPMessageTranslator
       from.get(buf);
       return new String(buf);
     }
-    throw new MessagingException("TAIP message field size is expected to be " + bytes + " bytes long but only " + from.remaining() + " bytes are actually available.");
+    throw new MessagingException(LOGGER.translate("MESSAGE_SIZE_VALIDATION",bytes,from.remaining()));
   }
 
   protected Date toTime(Integer s, Integer ms)

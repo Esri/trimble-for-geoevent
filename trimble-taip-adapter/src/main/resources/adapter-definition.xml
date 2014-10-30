@@ -1,5 +1,5 @@
-<adapter name="TAIP" label="TAIP Inbound Adapter" domain="com.esri.geoevent.adapter.inbound" type="inbound">
-	<description>This adapter is capable of receiving raw data in the TAIP format from AVL units.</description>
+<adapter name="TAIP" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.ADAPTER_IN_LABEL}" domain="com.esri.geoevent.adapter.inbound" type="inbound">
+	<description>${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.ADAPTER_IN_DESC}</description>
 	<geoEventDefinitions>
 		<geoEventDefinition name="TAIP0xF0">
 			<fieldDefinitions>

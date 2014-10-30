@@ -30,17 +30,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.esri.ges.adapter.AdapterDefinition;
 import com.esri.ges.adapter.InboundAdapterBase;
 import com.esri.ges.core.component.ComponentException;
 import com.esri.ges.core.geoevent.GeoEvent;
+import com.esri.ges.framework.i18n.BundleLogger;
+import com.esri.ges.framework.i18n.BundleLoggerFactory;
 
 public class TaipInboundAdapter extends InboundAdapterBase
 {
-  private static final Log LOG = LogFactory.getLog(TaipInboundAdapter.class);
+  private static final BundleLogger LOGGER = BundleLoggerFactory.getLogger(TaipInboundAdapter.class);
+
   private final Map<String, TAIPMessageTranslator> translators = new HashMap<String, TAIPMessageTranslator>();
   private final Map<String, String> lookup = new HashMap<String, String>();
 
@@ -82,16 +82,17 @@ public class TaipInboundAdapter extends InboundAdapterBase
             try
             {
               GeoEvent geoEvent = geoEventCreator.create(((AdapterDefinition) definition).getGeoEventDefinition(lookup.get(taipFormat)).getGuid());
-              translators.get(taipFormat).translate(channelId, message, geoEvent, spatial);
+              translators.get(taipFormat).translate(channelId, message, geoEvent);
               geoEventListener.receive(geoEvent);
             }
-            catch (Throwable t)
+            catch (Throwable error)
             {
-              LOG.error("ERROR translating TAIP message: " + t.getMessage());
+            	LOGGER.error("TRANSLATION_ERROR", error.getMessage());
+            	LOGGER.info(error.getMessage(), error);
             }
           }
           else
-            LOG.error("ERROR translating TAIP message: TAIP format '" + taipFormat + "' is not supported");
+          	LOGGER.error("TRANSLATION_ERROR_FORMAT_NOT_SUPPORTED", taipFormat);
         }
       }
     }

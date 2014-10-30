@@ -26,15 +26,18 @@ package com.esri.geoevent.adapter.trimble.taip;
 
 import java.nio.ByteBuffer;
 
+import com.esri.core.geometry.MapGeometry;
+import com.esri.core.geometry.Point;
+import com.esri.core.geometry.SpatialReference;
 import com.esri.ges.core.geoevent.FieldException;
 import com.esri.ges.core.geoevent.GeoEvent;
 import com.esri.ges.messaging.MessagingException;
-import com.esri.ges.spatial.Spatial;
+import com.esri.ges.util.GeometryUtil;
 
 public class TAIP0xF0MessageTranslator extends TAIPMessageTranslator
 {
   @Override
-  protected void translate(String trackId, ByteBuffer buf, GeoEvent geoEvent, Spatial spatial) throws MessagingException, FieldException
+  protected void translate(String trackId, ByteBuffer buf, GeoEvent geoEvent) throws MessagingException, FieldException
   {
     int i = 0;
     geoEvent.setField(i++, trackId);
@@ -42,7 +45,10 @@ public class TAIP0xF0MessageTranslator extends TAIPMessageTranslator
     Integer y = convertToInteger(readString(buf, 8).replace('+', ' ').trim());
     Integer x = convertToInteger(readString(buf, 9).replace('+', ' ').trim());
     if (x != null && y != null)
-      geoEvent.setField(i++, spatial.createPoint(x * 0.00001, y * 0.00001, 4326).toJson());
+    {
+    	MapGeometry geometry =  new MapGeometry(new Point(x * 0.00001, y * 0.00001), SpatialReference.create(4326));
+      geoEvent.setField(i++, GeometryUtil.toJson(geometry));
+    }
     geoEvent.setField(i++, convertToShort(readString(buf, 3)));
     geoEvent.setField(i++, convertToShort(readString(buf, 3)));
     geoEvent.setField(i++, convertToShort(readString(buf, 1)));
