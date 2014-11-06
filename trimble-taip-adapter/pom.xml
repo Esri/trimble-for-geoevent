@@ -9,12 +9,6 @@
 	<groupId>com.esri.geoevent.adapter.trimble.taip</groupId>
 	<artifactId>trimble-taip-adapter</artifactId>
 	<name>Esri :: GeoEvent :: Adapter :: Trimble :: TAIP</name>
-	<dependencies>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-		</dependency>
-	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
