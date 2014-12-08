@@ -1,6 +1,6 @@
 # trimble-for-geoevent
 
-ArcGIS GeoEvent Processor Sample Trimble Connector for receiving raw data in the TAIP format.
+ArcGIS 10.3.x GeoEvent Extension Sample Trimble Connector for receiving raw data in the TAIP format.
 
 ![App](trimble-for-geoevent.png?raw=true)
 
@@ -11,24 +11,24 @@ ArcGIS GeoEvent Processor Sample Trimble Connector for receiving raw data in the
 
 Building the source code:
 
-1. Make sure Maven and ArcGIS GeoEvent Processor SDK are installed on your machine.
+1. Make sure Maven and ArcGIS GeoEvent Extension SDK are installed on your machine.
 2. Run 'mvn install -Dcontact.address=[YourContactEmailAddress]'
 
 Installing the built jar files:
 
-1. Copy the *.jar files under the 'target' sub-folder(s) into the [ArcGIS-GeoEvent-Processor-Install-Directory]/deploy folder.
+1. Copy the *.jar files under the 'target' sub-folder(s) into the [ArcGIS-GeoEvent-Extension-Install-Directory]/deploy folder.
 
 ## Requirements
 
-* ArcGIS GeoEvent Processor for Server.
-* ArcGIS GeoEvent Processor SDK.
-* Java JDK 1.6 or greater.
+* ArcGIS GeoEvent Extension for Server.
+* ArcGIS GeoEvent Extension SDK.
+* Java JDK 1.7 or greater.
 * Maven.
 
 ## Resources
 
-* [Download the connector's tutorial](http://www.arcgis.com/home/item.html?id=369e4851717b4483877053f58f64b430) from the ArcGIS GeoEvent Processor Gallery
-* [ArcGIS GeoEvent Processor for Server Resource Center](http://pro.arcgis.com/share/geoevent-processor/)
+* [Download the connector's tutorial](http://www.arcgis.com/home/item.html?id=369e4851717b4483877053f58f64b430) from the ArcGIS GeoEvent Extension Gallery
+* [ArcGIS GeoEvent Extension for Server Resource Center](http://links.esri.com/geoevent)
 * [ArcGIS Blog](http://blogs.esri.com/esri/arcgis/)
 * [twitter@esri](http://twitter.com/esri)
 
@@ -58,5 +58,5 @@ limitations under the License.
 A copy of the license is available in the repository's [license.txt](license.txt?raw=true) file.
 
 [](ArcGIS, GeoEvent, Processor, Connector, Trimble, TAIP)
-[](Esri Tags: ArcGIS GeoEvent Processor for Server)
+[](Esri Tags: ArcGIS GeoEvent Extension for Server)
 [](Esri Language: Java)
