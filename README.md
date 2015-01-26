@@ -1,6 +1,6 @@
 # trimble-for-geoevent
 
-ArcGIS 10.3.x GeoEvent Extension Sample Trimble Connector for receiving raw data in the TAIP format.
+ArcGIS 10.3 GeoEvent Extension for Server Sample Trimble Connector for receiving raw data in the TAIP format.
 
 ![App](trimble-for-geoevent.png?raw=true)
 
@@ -28,7 +28,7 @@ Installing the built jar files:
 ## Resources
 
 * [Download the connector's tutorial](http://www.arcgis.com/home/item.html?id=369e4851717b4483877053f58f64b430) from the ArcGIS GeoEvent Extension Gallery
-* [ArcGIS GeoEvent Extension for Server Resource Center](http://links.esri.com/geoevent)
+* [ArcGIS GeoEvent Extension for Server Resources](http://links.esri.com/geoevent)
 * [ArcGIS Blog](http://blogs.esri.com/esri/arcgis/)
 * [twitter@esri](http://twitter.com/esri)
 
