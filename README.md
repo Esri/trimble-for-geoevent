@@ -1,6 +1,6 @@
 # trimble-for-geoevent
 
-ArcGIS 10.3 GeoEvent Extension for Server sample Trimble Input Connector for receiving raw data in the TAIP format.
+ArcGIS 10.4 GeoEvent Extension for Server sample Trimble Input Connector for receiving raw data in the TAIP format.
 
 ![App](trimble-for-geoevent.png?raw=true)
 
