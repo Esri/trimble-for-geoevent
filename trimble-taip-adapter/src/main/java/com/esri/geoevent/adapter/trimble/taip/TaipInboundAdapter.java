@@ -50,9 +50,11 @@ public class TaipInboundAdapter extends InboundAdapterBase
     lookup.put("RPV", "TAIP0xF0");
     lookup.put("RCP", "TAIP0xF1");
     lookup.put("RLN", "TAIP0xF2");
+    lookup.put("RAM", "TAIPRAM");
     translators.put("RPV", new TAIP0xF0MessageTranslator());
     translators.put("RCP", new TAIP0xF1MessageTranslator());
     translators.put("RLN", new TAIP0xF2MessageTranslator());
+    translators.put("RAM", new TAIPRAMMessageTranslator());    
   }
 
   private class GeoEventProducer implements Runnable

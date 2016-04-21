@@ -22,6 +22,7 @@
 				<fieldDefinition name="Heading" type="Short"/>
 				<fieldDefinition name="Source" type="Short"/>
 				<fieldDefinition name="Age" type="Short"/>
+				<fieldDefinition name="Id" type="String"/>
 			</fieldDefinitions>
 		</geoEventDefinition>
 		<geoEventDefinition name="TAIP0xF1">
@@ -43,6 +44,7 @@
 				</fieldDefinition>
 				<fieldDefinition name="Source" type="Short"/>
 				<fieldDefinition name="Age" type="Short"/>
+				<fieldDefinition name="Id" type="String"/>
 			</fieldDefinitions>
 		</geoEventDefinition>
 		<geoEventDefinition name="TAIP0xF2">
@@ -71,6 +73,34 @@
 				<fieldDefinition name="Reserved" type="String"/>
 				<fieldDefinition name="Source" type="Short"/>
 				<fieldDefinition name="Age" type="Short"/>
+				<fieldDefinition name="Id" type="String"/>
+			</fieldDefinitions>
+		</geoEventDefinition>
+		<geoEventDefinition name="TAIPAM">
+			<fieldDefinitions>
+				<fieldDefinition name="DeviceId" type="String">
+					<fieldDefinitionTag>
+						<name>TRACK_ID</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="TimeStamp" type="Date">
+					<fieldDefinitionTag>
+						<name>TIME_START</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="Shape" type="Geometry">
+					<fieldDefinitionTag>
+						<name>GEOMETRY</name>
+					</fieldDefinitionTag>
+				</fieldDefinition>
+				<fieldDefinition name="Speed" type="Short"/>
+				<fieldDefinition name="Heading" type="Short"/>
+				<fieldDefinition name="AlarmCode" type="String"/>
+				<fieldDefinition name="Source" type="Short"/>
+				<fieldDefinition name="Age" type="Short"/>
+				<fieldDefinition name="LengthofOptionalString" type="Short"/>
+				<fieldDefinition name="OptionalString" type="String"/>
+				<fieldDefinition name="Id" type="String"/>
 			</fieldDefinitions>
 		</geoEventDefinition>
 	</geoEventDefinitions>

@@ -145,4 +145,38 @@ public abstract class TAIPMessageTranslator
     }
     return null;
   }
+  
+  public void readIDField(ByteBuffer buf, GeoEvent geoEvent, int i) throws MessagingException, FieldException
+  {
+    //Check if there is more data
+    int rm = buf.remaining();
+    if (buf.remaining() > 14)
+    {
+        buf.mark();
+        readString(buf, 1); //Read out semi-colon ;
+        String idName = readString(buf, 3); //Read out ID=
+        if (idName.equals("ID=") == true)
+        {
+          //read until ';' to get value of the ID
+          String id = "";
+          while(true)
+          {
+              String data = readString(buf, 1);
+              if (data.equals(";") == false)
+              {
+                id += data;              
+              }
+              else
+              {
+                break;
+              }
+          }
+          geoEvent.setField(i++, id);               
+        }
+        else //no ID= field
+        {
+          buf.reset(); //set the buf position back to the marked position
+        }
+    }
+  }  
 }
