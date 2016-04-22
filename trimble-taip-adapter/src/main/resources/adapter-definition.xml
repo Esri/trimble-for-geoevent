@@ -76,7 +76,7 @@
 				<fieldDefinition name="Id" type="String"/>
 			</fieldDefinitions>
 		</geoEventDefinition>
-		<geoEventDefinition name="TAIPAM">
+		<geoEventDefinition name="TAIPRAM">
 			<fieldDefinitions>
 				<fieldDefinition name="DeviceId" type="String">
 					<fieldDefinitionTag>
