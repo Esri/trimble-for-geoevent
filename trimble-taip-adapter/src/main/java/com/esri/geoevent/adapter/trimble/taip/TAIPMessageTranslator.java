@@ -150,7 +150,7 @@ public abstract class TAIPMessageTranslator
   {
     //Check if there is more data
     int rm = buf.remaining();
-    if (buf.remaining() > 14)
+    if (buf.remaining() > 8)
     {
         buf.mark();
         readString(buf, 1); //Read out semi-colon ;
