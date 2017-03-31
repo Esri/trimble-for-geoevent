@@ -1,8 +1,8 @@
 <connectorDefinition label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_LABEL}" name="esri-in-tcp-taip" type="inbound">
 	<description>${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_DESC}</description>
 	<defaultName>tcp-taip-in</defaultName>
-	<adapter uri="com.esri.geoevent.adapter.inbound/TAIP/10.4.0" />
-	<transport uri="com.esri.ges.transport.inbound/TCP/10.4.0" />
+	<adapter uri="com.esri.geoevent.adapter.inbound/TAIP/10.5.0" />
+	<transport uri="com.esri.ges.transport.inbound/TCP/10.5.0" />
 	<properties>
 		<shown>
 			<property name="port" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_SERVER_PORT_LBL}" default="5565" source="transport" />
