@@ -1,5 +1,5 @@
 /*
-  Copyright 1995-2013 Esri
+  Copyright 1995-2019 Esri
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ public abstract class TAIPMessageTranslator
       from.get(buf);
       return new String(buf);
     }
-    throw new MessagingException(LOGGER.translate("MESSAGE_SIZE_VALIDATION",bytes,from.remaining()));
+    throw new MessagingException(LOGGER.translate("MESSAGE_SIZE_VALIDATION", bytes, from.remaining()));
   }
 
   protected Date toTime(Integer s, Integer ms)
@@ -148,18 +148,18 @@ public abstract class TAIPMessageTranslator
   
   public void readIDField(ByteBuffer buf, GeoEvent geoEvent, int i) throws MessagingException, FieldException
   {
-    //Check if there is more data
-    int rm = buf.remaining();
+    // Check if there is more data
+    // int rm = buf.remaining();
     if (buf.remaining() > 8)
     {
         buf.mark();
-        readString(buf, 1); //Read out semi-colon ;
-        String idName = readString(buf, 3); //Read out ID=
+      readString(buf, 1); // Read out semi-colon ;
+      String idName = readString(buf, 3); // Read out ID=
         if (idName.equals("ID=") == true)
         {
-          //read until ';' to get value of the ID
+        // read until ';' to get value of the ID
           String id = "";
-          while(true)
+        while (true)
           {
               String data = readString(buf, 1);
               if (data.equals(";") == false)
@@ -173,9 +173,9 @@ public abstract class TAIPMessageTranslator
           }
           geoEvent.setField(i++, id);               
         }
-        else //no ID= field
+      else // no ID= field
         {
-          buf.reset(); //set the buf position back to the marked position
+        buf.reset(); // set the buf position back to the marked position
         }
     }
   }  

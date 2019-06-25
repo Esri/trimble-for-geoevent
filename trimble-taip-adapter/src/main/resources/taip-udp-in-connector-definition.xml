@@ -1,8 +1,8 @@
 <connectorDefinition label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_LABEL}" name="esri-in-udp-taip" type="inbound">
 	<description>${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_DESC}</description>
 	<defaultName>udp-taip-in</defaultName>
-	<adapter uri="com.esri.geoevent.adapter.inbound/TAIP/10.5.0" />
-	<transport uri="com.esri.ges.transport.inbound/UDP/10.5.0" />
+	<adapter uri="com.esri.geoevent.adapter.inbound/TAIP/${project.version}" />
+	<transport uri="com.esri.ges.transport.inbound/UDP/${project.version}" />
 	<properties>
 		<shown>
 			<property name="port" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_SERVER_PORT_LBL}" default="5565" source="transport" />
