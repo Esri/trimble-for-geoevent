@@ -1,5 +1,5 @@
 /*
-  Copyright 1995-2013 Esri
+  Copyright 1995-2019 Esri
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -38,9 +38,9 @@ import com.esri.ges.messaging.MessagingException;
 
 public abstract class TAIPMessageTranslator
 {
-  private static final BundleLogger LOGGER = BundleLoggerFactory.getLogger(TAIPMessageTranslator.class);
+  private static final BundleLogger LOGGER = BundleLoggerFactory.getLogger(TaipInboundAdapter.class);
 
-  protected GeoEventCreator geoEventCreator;
+  protected GeoEventCreator         geoEventCreator;
 
   protected abstract void translate(String trackId, ByteBuffer buffer, GeoEvent geoEvent) throws MessagingException, FieldException;
 
@@ -52,7 +52,7 @@ public abstract class TAIPMessageTranslator
       from.get(buf);
       return new String(buf);
     }
-    throw new MessagingException(LOGGER.translate("MESSAGE_SIZE_VALIDATION",bytes,from.remaining()));
+    throw new MessagingException(LOGGER.translate("MESSAGE_SIZE_VALIDATION", bytes, from.remaining()));
   }
 
   protected Date toTime(Integer s, Integer ms)
@@ -145,38 +145,38 @@ public abstract class TAIPMessageTranslator
     }
     return null;
   }
-  
+
   public void readIDField(ByteBuffer buf, GeoEvent geoEvent, int i) throws MessagingException, FieldException
   {
-    //Check if there is more data
-    int rm = buf.remaining();
+    // Check if there is more data
+    // int rm = buf.remaining();
     if (buf.remaining() > 8)
     {
-        buf.mark();
-        readString(buf, 1); //Read out semi-colon ;
-        String idName = readString(buf, 3); //Read out ID=
-        if (idName.equals("ID=") == true)
+      buf.mark();
+      readString(buf, 1); // Read out semi-colon ;
+      String idName = readString(buf, 3); // Read out ID=
+      if (idName.equals("ID=") == true)
+      {
+        // read until ';' to get value of the ID
+        String id = "";
+        while (true)
         {
-          //read until ';' to get value of the ID
-          String id = "";
-          while(true)
+          String data = readString(buf, 1);
+          if (data.equals(";") == false)
           {
-              String data = readString(buf, 1);
-              if (data.equals(";") == false)
-              {
-                id += data;              
-              }
-              else
-              {
-                break;
-              }
+            id += data;
           }
-          geoEvent.setField(i++, id);               
+          else
+          {
+            break;
+          }
         }
-        else //no ID= field
-        {
-          buf.reset(); //set the buf position back to the marked position
-        }
+        geoEvent.setField(i++, id);
+      }
+      else // no ID= field
+      {
+        buf.reset(); // set the buf position back to the marked position
+      }
     }
-  }  
+  }
 }

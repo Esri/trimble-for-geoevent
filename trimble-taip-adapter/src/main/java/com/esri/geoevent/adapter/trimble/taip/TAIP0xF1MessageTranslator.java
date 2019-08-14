@@ -1,5 +1,5 @@
 /*
-  Copyright 1995-2013 Esri
+  Copyright 1995-2019 Esri
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -39,35 +39,43 @@ public class TAIP0xF1MessageTranslator extends TAIPMessageTranslator
   @Override
   protected void translate(String trackId, ByteBuffer buf, GeoEvent geoEvent) throws MessagingException, FieldException
   {
-    //CP Compact Position Solution
-    //AAAAABBBCCCCDDDDEEEEFG
-    //Total number of characters is 22
+    // CP Compact Position Solution
+    // AAAAABBBCCCCDDDDEEEEFG
+    // Total number of characters is 22
     int i = 0;
     geoEvent.setField(i++, trackId);
-    geoEvent.setField(i++, toTime(convertToInteger(readString(buf, 5)), 0));   //GPS Time of day 5 Sec AAAAA
-    Integer y = convertToInteger(readString(buf, 7).replace('+', ' ').trim()); //Latitude 7 Deg BBBCCCC
-    Integer x = convertToInteger(readString(buf, 8).replace('+', ' ').trim()); //Longitude 8 Deg DDDDEEEE
+
+    // GPS Time of day 5 Sec AAAAA
+    geoEvent.setField(i++, toTime(convertToInteger(readString(buf, 5)), 0));
+
+    // Latitude 7 Deg BBBCCCC
+    Integer y = convertToInteger(readString(buf, 7).replace('+', ' ').trim());
+
+    // Longitude 8 Deg DDDDEEEE
+    Integer x = convertToInteger(readString(buf, 8).replace('+', ' ').trim());
     if (x != null && y != null)
     {
-    	MapGeometry geometry =  new MapGeometry(new Point(x * 0.0001, y * 0.00001), SpatialReference.create(4326));
+      MapGeometry geometry = new MapGeometry(new Point(x * 0.0001, y * 0.0001), SpatialReference.create(4326));
       geoEvent.setField(i++, GeometryUtil.toJson(geometry));
     }
-    geoEvent.setField(i++, convertToShort(readString(buf, 1))); //Source 1 n/a F
-    /*
-    0 = 2D GPS
-    1 = 3D GPS
-    2 = 2D DGPS
-    3 = 3D DGPS
-    6 = DR
-    8 = Degraded DR
-    9 = Unknown
-    */
-    geoEvent.setField(i++, convertToShort(readString(buf, 1))); //Age of Data Indicator 1 n/a G
-    /*
-    2 = Fresh, <10 sec
-    1 = Old, >10 sec
-    0 = Not available
-    */
+
+    // Source 1 n/a F
+    // 0 = 2D GPS
+    // 1 = 3D GPS
+    // 2 = 2D DGPS
+    // 3 = 3D DGPS
+    // 6 = DR
+    // 8 = Degraded DR
+    // 9 = Unknown
+    // 4,5,7 = Not Defined
+    geoEvent.setField(i++, convertToShort(readString(buf, 1)));
+
+    // Age of Data Indicator 1 n/a G
+    // 2 = Fresh, <10 sec
+    // 1 = Old, >10 sec
+    // 0 = Not available
+    geoEvent.setField(i++, convertToShort(readString(buf, 1)));
+
     readIDField(buf, geoEvent, i);
   }
 }
