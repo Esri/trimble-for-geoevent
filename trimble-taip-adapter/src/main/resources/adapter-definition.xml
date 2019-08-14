@@ -1,107 +1,107 @@
 <adapter name="TAIP" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.ADAPTER_IN_LABEL}" domain="com.esri.geoevent.adapter.inbound" type="inbound">
-	<description>${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.ADAPTER_IN_DESC}</description>
-	<geoEventDefinitions>
-		<geoEventDefinition name="TAIP0xF0">
-			<fieldDefinitions>
-				<fieldDefinition name="DeviceId" type="String">
-					<fieldDefinitionTag>
-						<name>TRACK_ID</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="TimeStamp" type="Date">
-					<fieldDefinitionTag>
-						<name>TIME_START</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="Shape" type="Geometry">
-					<fieldDefinitionTag>
-						<name>GEOMETRY</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="Speed" type="Short"/>
-				<fieldDefinition name="Heading" type="Short"/>
-				<fieldDefinition name="Source" type="Short"/>
-				<fieldDefinition name="Age" type="Short"/>
-				<fieldDefinition name="Id" type="String"/>
-			</fieldDefinitions>
-		</geoEventDefinition>
-		<geoEventDefinition name="TAIP0xF1">
-			<fieldDefinitions>
-				<fieldDefinition name="DeviceId" type="String">
-					<fieldDefinitionTag>
-						<name>TRACK_ID</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="TimeStamp" type="Date">
-					<fieldDefinitionTag>
-						<name>TIME_START</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="Shape" type="Geometry">
-					<fieldDefinitionTag>
-						<name>GEOMETRY</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="Source" type="Short"/>
-				<fieldDefinition name="Age" type="Short"/>
-				<fieldDefinition name="Id" type="String"/>
-			</fieldDefinitions>
-		</geoEventDefinition>
-		<geoEventDefinition name="TAIP0xF2">
-			<fieldDefinitions>
-				<fieldDefinition name="DeviceId" type="String">
-					<fieldDefinitionTag>
-						<name>TRACK_ID</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="TimeStamp" type="Date">
-					<fieldDefinitionTag>
-						<name>TIME_START</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="Shape" type="Geometry">
-					<fieldDefinitionTag>
-						<name>GEOMETRY</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="Altitude" type="Double"/>
-				<fieldDefinition name="HorizSpeed" type="Double"/>
-				<fieldDefinition name="VertSpeed" type="Double"/>
-				<fieldDefinition name="Heading" type="Double"/>
-				<fieldDefinition name="NumSVs" type="Short"/>
-				<fieldDefinition name="SV" type="String"/>
-				<fieldDefinition name="Reserved" type="String"/>
-				<fieldDefinition name="Source" type="Short"/>
-				<fieldDefinition name="Age" type="Short"/>
-				<fieldDefinition name="Id" type="String"/>
-			</fieldDefinitions>
-		</geoEventDefinition>
-		<geoEventDefinition name="TAIPRAM">
-			<fieldDefinitions>
-				<fieldDefinition name="DeviceId" type="String">
-					<fieldDefinitionTag>
-						<name>TRACK_ID</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="TimeStamp" type="Date">
-					<fieldDefinitionTag>
-						<name>TIME_START</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="Shape" type="Geometry">
-					<fieldDefinitionTag>
-						<name>GEOMETRY</name>
-					</fieldDefinitionTag>
-				</fieldDefinition>
-				<fieldDefinition name="Speed" type="Short"/>
-				<fieldDefinition name="Heading" type="Short"/>
-				<fieldDefinition name="AlarmCode" type="String"/>
-				<fieldDefinition name="Source" type="Short"/>
-				<fieldDefinition name="Age" type="Short"/>
-				<fieldDefinition name="LengthofOptionalString" type="Short"/>
-				<fieldDefinition name="OptionalString" type="String"/>
-				<fieldDefinition name="Id" type="String"/>
-			</fieldDefinitions>
-		</geoEventDefinition>
-	</geoEventDefinitions>
+  <description>Release ${project.release}: ${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.ADAPTER_IN_DESC}</description>
+  <geoEventDefinitions>
+    <geoEventDefinition name="TAIP0xF0">
+      <fieldDefinitions>
+        <fieldDefinition name="DeviceId" type="String">
+          <fieldDefinitionTag>
+            <name>TRACK_ID</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="TimeStamp" type="Date">
+          <fieldDefinitionTag>
+            <name>TIME_START</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="Shape" type="Geometry">
+          <fieldDefinitionTag>
+            <name>GEOMETRY</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="Speed" type="Short" />
+        <fieldDefinition name="Heading" type="Short" />
+        <fieldDefinition name="Source" type="Short" />
+        <fieldDefinition name="Age" type="Short" />
+        <fieldDefinition name="Id" type="String" />
+      </fieldDefinitions>
+    </geoEventDefinition>
+    <geoEventDefinition name="TAIP0xF1">
+      <fieldDefinitions>
+        <fieldDefinition name="DeviceId" type="String">
+          <fieldDefinitionTag>
+            <name>TRACK_ID</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="TimeStamp" type="Date">
+          <fieldDefinitionTag>
+            <name>TIME_START</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="Shape" type="Geometry">
+          <fieldDefinitionTag>
+            <name>GEOMETRY</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="Source" type="Short" />
+        <fieldDefinition name="Age" type="Short" />
+        <fieldDefinition name="Id" type="String" />
+      </fieldDefinitions>
+    </geoEventDefinition>
+    <geoEventDefinition name="TAIP0xF2">
+      <fieldDefinitions>
+        <fieldDefinition name="DeviceId" type="String">
+          <fieldDefinitionTag>
+            <name>TRACK_ID</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="TimeStamp" type="Date">
+          <fieldDefinitionTag>
+            <name>TIME_START</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="Shape" type="Geometry">
+          <fieldDefinitionTag>
+            <name>GEOMETRY</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="Altitude" type="Double" />
+        <fieldDefinition name="HorizSpeed" type="Double" />
+        <fieldDefinition name="VertSpeed" type="Double" />
+        <fieldDefinition name="Heading" type="Double" />
+        <fieldDefinition name="NumSVs" type="Short" />
+        <fieldDefinition name="SV" type="String" />
+        <fieldDefinition name="Reserved" type="String" />
+        <fieldDefinition name="Source" type="Short" />
+        <fieldDefinition name="Age" type="Short" />
+        <fieldDefinition name="Id" type="String" />
+      </fieldDefinitions>
+    </geoEventDefinition>
+    <geoEventDefinition name="TAIPRAM">
+      <fieldDefinitions>
+        <fieldDefinition name="DeviceId" type="String">
+          <fieldDefinitionTag>
+            <name>TRACK_ID</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="TimeStamp" type="Date">
+          <fieldDefinitionTag>
+            <name>TIME_START</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="Shape" type="Geometry">
+          <fieldDefinitionTag>
+            <name>GEOMETRY</name>
+          </fieldDefinitionTag>
+        </fieldDefinition>
+        <fieldDefinition name="Speed" type="Short" />
+        <fieldDefinition name="Heading" type="Short" />
+        <fieldDefinition name="AlarmCode" type="String" />
+        <fieldDefinition name="Source" type="Short" />
+        <fieldDefinition name="Age" type="Short" />
+        <fieldDefinition name="LengthofOptionalString" type="Short" />
+        <fieldDefinition name="OptionalString" type="String" />
+        <fieldDefinition name="Id" type="String" />
+      </fieldDefinitions>
+    </geoEventDefinition>
+  </geoEventDefinitions>
 </adapter>

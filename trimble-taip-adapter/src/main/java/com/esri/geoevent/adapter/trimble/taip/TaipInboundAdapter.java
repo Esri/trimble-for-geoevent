@@ -42,15 +42,16 @@ import com.esri.ges.manager.geoeventdefinition.GeoEventDefinitionManagerExceptio
 
 public class TaipInboundAdapter extends InboundAdapterBase
 {
-  private static final BundleLogger LOGGER = BundleLoggerFactory.getLogger(TaipInboundAdapter.class);
+  private static final BundleLogger                LOGGER             = BundleLoggerFactory.getLogger(TaipInboundAdapter.class);
 
-  private final Map<String, TAIPMessageTranslator> translators = new HashMap<String, TAIPMessageTranslator>();
-  private final Map<String, String> lookup = new HashMap<String, String>();
+  private final Map<String, TAIPMessageTranslator> translators        = new HashMap<String, TAIPMessageTranslator>();
+  private final Map<String, String>                lookup             = new HashMap<String, String>();
   private final Map<String, GeoEventDefinition>    eventDefinitionMap = new HashMap<String, GeoEventDefinition>();
 
   public TaipInboundAdapter(AdapterDefinition definition) throws ComponentException
   {
     super(definition);
+
     lookup.put("RPV", "TAIP0xF0");
     lookup.put("RCP", "TAIP0xF1");
     lookup.put("RLN", "TAIP0xF2");
@@ -58,12 +59,12 @@ public class TaipInboundAdapter extends InboundAdapterBase
     translators.put("RPV", new TAIP0xF0MessageTranslator());
     translators.put("RCP", new TAIP0xF1MessageTranslator());
     translators.put("RLN", new TAIP0xF2MessageTranslator());
-    translators.put("RAM", new TAIPRAMMessageTranslator());    
+    translators.put("RAM", new TAIPRAMMessageTranslator());
   }
 
   private class GeoEventProducer implements Runnable
   {
-    private String channelId;
+    private String       channelId;
     private List<byte[]> messages;
 
     public GeoEventProducer(String channelId, List<byte[]> messages)
@@ -94,12 +95,12 @@ public class TaipInboundAdapter extends InboundAdapterBase
             }
             catch (Throwable error)
             {
-            	LOGGER.error("TRANSLATION_ERROR", error.getMessage());
-            	LOGGER.info(error.getMessage(), error);
+              LOGGER.warn("TRANSLATION_ERROR", error.getMessage());
+              LOGGER.debug(error.getMessage(), error);
             }
           }
           else
-          	LOGGER.error("TRANSLATION_ERROR_FORMAT_NOT_SUPPORTED", taipFormat);
+            LOGGER.error("TRANSLATION_ERROR_FORMAT_NOT_SUPPORTED", taipFormat);
         }
       }
     }
@@ -115,7 +116,7 @@ public class TaipInboundAdapter extends InboundAdapterBase
     // the adapter's adapt() method.
     return null;
   }
-  
+
   @Override
   public void receive(ByteBuffer buffer, String channelId)
   {

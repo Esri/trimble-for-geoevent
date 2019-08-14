@@ -42,7 +42,7 @@ public class TAIPRAMMessageTranslator extends TAIPMessageTranslator
     // AM Alarm
     // AAAAABBBCCCCCDDDDEEEEEFFFGGGHIJKK{L}
     // Total 33 + Length of Optional String
-    
+
     int i = 0;
     geoEvent.setField(i++, trackId);
 

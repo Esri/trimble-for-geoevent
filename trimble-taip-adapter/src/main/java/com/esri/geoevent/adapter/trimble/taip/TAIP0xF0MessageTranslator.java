@@ -40,11 +40,11 @@ public class TAIP0xF0MessageTranslator extends TAIPMessageTranslator
   protected void translate(String trackId, ByteBuffer buf, GeoEvent geoEvent) throws MessagingException, FieldException
   {
     // PV Position/Velocity Solution
-    //    AAAAABBBCCCCCDDDDEEEEEFFFGGGHI
+    // AAAAABBBCCCCCDDDDEEEEEFFFGGGHI
     // Total 30
     // >RPV15714+3739438-1220384601512612;ID=1234;*7F<
     // >RPV06624-3189567+1160078800027302;ID=AAFKF;*39<
-    
+
     int i = 0;
     geoEvent.setField(i++, trackId);
 
@@ -58,7 +58,7 @@ public class TAIP0xF0MessageTranslator extends TAIPMessageTranslator
     Integer x = convertToInteger(readString(buf, 9).replace('+', ' ').trim());
     if (x != null && y != null)
     {
-    	MapGeometry geometry =  new MapGeometry(new Point(x * 0.00001, y * 0.00001), SpatialReference.create(4326));
+      MapGeometry geometry = new MapGeometry(new Point(x * 0.00001, y * 0.00001), SpatialReference.create(4326));
       geoEvent.setField(i++, GeometryUtil.toJson(geometry));
     }
 
@@ -83,7 +83,7 @@ public class TAIP0xF0MessageTranslator extends TAIPMessageTranslator
     // (1 = Old, ≥10 sec)
     // (0 = Not available)
     geoEvent.setField(i++, convertToShort(readString(buf, 1)));
-    
+
     readIDField(buf, geoEvent, i);
   }
 }

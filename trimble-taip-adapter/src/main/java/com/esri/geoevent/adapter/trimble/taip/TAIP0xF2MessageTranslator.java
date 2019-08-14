@@ -84,8 +84,8 @@ public class TAIP0xF2MessageTranslator extends TAIPMessageTranslator
     {
       // SV Id 2 n/a PP
       str_sv_id[j] = readString(buf, 2);
-      // IODE (2 digit hex) 2 n/a QQ 
-      str_iode[j] = readString(buf, 2); 
+      // IODE (2 digit hex) 2 n/a QQ
+      str_iode[j] = readString(buf, 2);
     }
 
     // Iterate an unknown quantity of sv_id and iode values

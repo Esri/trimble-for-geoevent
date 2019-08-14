@@ -1,16 +1,17 @@
-<connectorDefinition label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_LABEL}" name="esri-in-udp-taip" type="inbound">
-	<description>${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_DESC}</description>
-	<defaultName>udp-taip-in</defaultName>
-	<adapter uri="com.esri.geoevent.adapter.inbound/TAIP/${project.version}" />
-	<transport uri="com.esri.ges.transport.inbound/UDP/${project.version}" />
-	<properties>
-		<shown>
-			<property name="port" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_SERVER_PORT_LBL}" default="5565" source="transport" />
-		</shown>
-		<advanced>
-			<property name="multicast" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_MULTICAST_LBL}" default="false" source="transport"/>
-			<property name="multicastGroup" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_MULTICAST_GROUP_LBL}" default="233.252.0.99" source="transport"/>
-		</advanced>
-		<hidden/>
-	</properties>
+<connectorDefinition label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_LABEL}" name="esri-receive-taip-udp" type="inbound">
+  <description>${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_DESC}</description>
+  <defaultName>udp-taip-in</defaultName>
+  <adapter uri="com.esri.geoevent.adapter.inbound/TAIP/${project.version}" />
+  <transport uri="com.esri.ges.transport.inbound/UDP/${project.version}" />
+  <properties>
+    <shown>
+      <property name="port" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_SERVER_PORT_LBL}" default="5565" source="transport" />
+    </shown>
+    <advanced>
+      <property name="multicast" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_MULTICAST_LBL}" default="false" source="transport" />
+      <property name="multicastGroup" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_UDP_MULTICAST_GROUP_LBL}" default="233.252.0.99"
+        source="transport" />
+    </advanced>
+    <hidden />
+  </properties>
 </connectorDefinition>
