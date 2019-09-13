@@ -1,19 +1,20 @@
-<connectorDefinition label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_LABEL}" name="esri-in-tcp-taip" type="inbound">
-	<description>${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_DESC}</description>
-	<defaultName>tcp-taip-in</defaultName>
-	<adapter uri="com.esri.geoevent.adapter.inbound/TAIP/10.5.0" />
-	<transport uri="com.esri.ges.transport.inbound/TCP/10.5.0" />
-	<properties>
-		<shown>
-			<property name="port" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_SERVER_PORT_LBL}" default="5565" source="transport" />
-		</shown>
-		<advanced>
-		</advanced>
-		<hidden>
-			<property name="mode" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_MODE_LBL}" default="SERVER" source="transport" />
-			<property name="host" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_HOST_LBL}" default="" source="transport" />
-			<property name="clientConnectionTimeout" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_CONNECTION_TO_LBL}" default="60" source="transport" />
-			<property name="handshake" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_HANDSHAKE_LBL}" default="" source="transport" />
-		</hidden>
-	</properties>
+<connectorDefinition label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_LABEL}" name="esri-receive-taip-tcp" type="inbound">
+  <description>${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_DESC}</description>
+  <defaultName>tcp-taip-in</defaultName>
+  <adapter uri="com.esri.geoevent.adapter.inbound/TAIP/${project.version}" />
+  <transport uri="com.esri.ges.transport.inbound/TCP/${project.version}" />
+  <properties>
+    <shown>
+      <property name="port" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_SERVER_PORT_LBL}" default="5565" source="transport" />
+    </shown>
+    <advanced>
+    </advanced>
+    <hidden>
+      <property name="mode" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_MODE_LBL}" default="SERVER" source="transport" />
+      <property name="host" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_HOST_LBL}" default="" source="transport" />
+      <property name="clientConnectionTimeout" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_CONNECTION_TO_LBL}" default="60"
+        source="transport" />
+      <property name="handshake" label="${com.esri.geoevent.adapter.trimble.taip.trimble-taip-adapter.CONNECTOR_TCP_HANDSHAKE_LBL}" default="" source="transport" />
+    </hidden>
+  </properties>
 </connectorDefinition>

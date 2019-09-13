@@ -33,24 +33,24 @@ import com.esri.ges.core.component.ComponentException;
 
 public class TaipInboundAdapterService extends AdapterServiceBase
 {
-	public TaipInboundAdapterService() throws ComponentException
-	{
-		XmlAdapterDefinition xmlAdapterDefinition = new XmlAdapterDefinition(getResourceAsStream("adapter-definition.xml"));
-		try
-		{
-			xmlAdapterDefinition.loadConnector(getResourceAsStream("taip-tcp-in-connector-definition.xml"));
-			xmlAdapterDefinition.loadConnector(getResourceAsStream("taip-udp-in-connector-definition.xml"));
-		}
-		catch (JAXBException e)
-		{
-			throw new RuntimeException(e);
-		}
-		definition = xmlAdapterDefinition;
-	}
+  public TaipInboundAdapterService() throws ComponentException
+  {
+    XmlAdapterDefinition xmlAdapterDefinition = new XmlAdapterDefinition(getResourceAsStream("adapter-definition.xml"));
+    try
+    {
+      xmlAdapterDefinition.loadConnector(getResourceAsStream("taip-tcp-in-connector-definition.xml"));
+      xmlAdapterDefinition.loadConnector(getResourceAsStream("taip-udp-in-connector-definition.xml"));
+    }
+    catch (JAXBException e)
+    {
+      throw new RuntimeException(e);
+    }
+    definition = xmlAdapterDefinition;
+  }
 
-	@Override
-	public Adapter createAdapter() throws ComponentException
-	{
-		return new TaipInboundAdapter(definition);
-	}
+  @Override
+  public Adapter createAdapter() throws ComponentException
+  {
+    return new TaipInboundAdapter(definition);
+  }
 }
