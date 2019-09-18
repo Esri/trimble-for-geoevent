@@ -25,6 +25,7 @@
 package com.esri.geoevent.adapter.trimble.taip;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -148,35 +149,65 @@ public abstract class TAIPMessageTranslator
 
   public void readIDField(ByteBuffer buf, GeoEvent geoEvent, int i) throws MessagingException, FieldException
   {
-    // Check if there is more data
-    // int rm = buf.remaining();
-    if (buf.remaining() > 8)
+    String remainderString = "";
+    try
     {
-      buf.mark();
-      readString(buf, 1); // Read out semi-colon ;
-      String idName = readString(buf, 3); // Read out ID=
-      if (idName.equals("ID=") == true)
+      StringBuilder remainder = new StringBuilder();
+      String next = "";
+      while (!"<".equals(next) && !">".equals(next) && buf.hasRemaining())
       {
-        // read until ';' to get value of the ID
-        String id = "";
-        while (true)
+        buf.mark();
+        next = readString(buf, 1);
+        if (">".equals(next))
         {
-          String data = readString(buf, 1);
-          if (data.equals(";") == false)
-          {
-            id += data;
-          }
-          else
-          {
-            break;
-          }
+          // Start of next message, reset and break while loop
+          buf.reset();
+          break;
         }
-        geoEvent.setField(i++, id);
+        else
+        {
+          remainder.append(next);
+        }
       }
-      else // no ID= field
+
+      final String[] remValueArray = { null, null };
+      remainderString = remainder.toString();
+      if (remainderString != null && !remainderString.isEmpty())
       {
-        buf.reset(); // set the buf position back to the marked position
+        remainderString = remainderString.replace("<", "").replace(">", "");
+        LOGGER.trace("Parsing remaining message string {0}", remainderString);
+
+        String[] finalFields = remainderString.split(";");
+        Arrays.stream(finalFields).forEach(remString ->
+          {
+            if (remString != null && !remString.trim().isEmpty())
+            {
+              LOGGER.trace("Parsing remaining message string fragment {0}", remString);
+              if (remString.toUpperCase().startsWith("ID="))
+              {
+                remValueArray[0] = remString.substring(3);
+              }
+              else if (remString.startsWith("*"))
+              {
+                remValueArray[1] = remString.substring(1);
+              }
+            }
+          });
       }
+
+      if (remValueArray[0] != null)
+      {
+        String id = remValueArray[0].trim();
+        if (!id.isEmpty())
+        {
+          LOGGER.trace("Setting event ID: {0}", id);
+          geoEvent.setField(i++, id);
+        }
+      }
+    }
+    catch (Exception e)
+    {
+      LOGGER.debug("Failed to parse ID field (remainder: {0}), moving on...", e, remainderString);
     }
   }
 }

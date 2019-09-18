@@ -14,7 +14,7 @@
     <maven.bundle.plugin.version>4.0.0</maven.bundle.plugin.version>
     <junit.version>4.8.1</junit.version>
     <jackson.version>1.9.5</jackson.version>
-    <project.release>7</project.release>
+    <project.release>8</project.release>
   </properties>
   <modules>
     <module>trimble-taip-adapter</module>

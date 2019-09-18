@@ -39,12 +39,15 @@ public class TAIP0xF0MessageTranslator extends TAIPMessageTranslator
   @Override
   protected void translate(String trackId, ByteBuffer buf, GeoEvent geoEvent) throws MessagingException, FieldException
   {
+    //
     // PV Position/Velocity Solution
     // AAAAABBBCCCCCDDDDEEEEEFFFGGGHI
     // Total 30
+    // ID= is optional and so is the checksum
     // >RPV15714+3739438-1220384601512612;ID=1234;*7F<
     // >RPV06624-3189567+1160078800027302;ID=AAFKF;*39<
-
+    // >RPV08844-3107176+1174402906718002;ID=10024019191<
+    
     int i = 0;
     geoEvent.setField(i++, trackId);
 
