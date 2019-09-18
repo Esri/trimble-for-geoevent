@@ -149,7 +149,6 @@ public abstract class TAIPMessageTranslator
 
   public void readIDField(ByteBuffer buf, GeoEvent geoEvent, int i) throws MessagingException, FieldException
   {
-
     String remainderString = "";
     try
     {
@@ -211,5 +210,4 @@ public abstract class TAIPMessageTranslator
       LOGGER.debug("Failed to parse ID field (remainder: {0}), moving on...", e, remainderString);
     }
   }
-
 }
